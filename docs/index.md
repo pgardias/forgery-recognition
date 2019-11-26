@@ -29,7 +29,9 @@ There are two ways that handwritten text can be used in machine learning project
 
 Offline handwritten data has the benefit of using historical documents which allows someone to say extract Abraham Lincoln’s style. However, as presented below it is hard to extract features from offline data. Figure 1 is a sample of offline data from the IAM online database which shows how offline data would be processed.
 
-**Figure 1.** Offline handwritten data from IAM http://www.fki.inf.unibe.ch/databases/iam-handwriting-database
+![](img/iam_example.PNG)
+
+**Figure 1.** [Offline handwritten data from IAM](http://www.fki.inf.unibe.ch/databases/iam-handwriting-database)
 
 Since the data is represented as an image, it is converted to an array of pixel values, which makes it hard to extract style. It is not clear in figure 1 where the L ends and the e begins, or the e and t. Offline data also makes storing someone’s style difficult, do you store the average pixels that makeup a character and the variations for certain features, if this is the case, how do you determine which features will be relevant before processing. These issues make it hard to work with offline data.
 
@@ -37,7 +39,7 @@ Online handwriting data is rare to find, and since the author had to write on a 
 
 ![](img/so_says_the_times.PNG)
 
-**Figure 2.** Pen Strokes representing online handwriting https://github.com/sjvasquez/handwriting-synthesis/pull/14
+**Figure 2.** [Pen Strokes representing online handwriting](https://github.com/sjvasquez/handwriting-synthesis/pull/14)
 
 With online handwritten data it is simple to tell when one letter ends and the next begins as we have the discrete points that create each letter. Since data is also included about when the pen lifts up then more complex features such as real time handwriting generation can be done. Finally, since we have the (x,y) of each pen stroke then we can determine the “curviness” of each letter, where the ligatures connect each letter, the average distance between letters and so on.
 
@@ -60,7 +62,7 @@ The loss function for D is a standard GAN loss which closely resembles cross-ent
 
 ![](img/gan_loss.PNG)
 
-**Figure 3.** Minimax GAN loss from https://developers.google.com/machine-learning/gan/loss
+**Figure 3.** [Minimax GAN loss](https://developers.google.com/machine-learning/gan/loss)
 
 GANs are new deep learning models so they are very complex. This model is great at creating realistic output with minimal data to train on however. Therefore, it is great for datasets with only a few samples for an author. It also uses offline handwriting.  Below is an example of a generated word that looks quite realistic, beneath it is another output that looks very off. In general these models have varying degrees of success. This is due to the fact that GANs attempt to convert input from the latent space into the output space, therefore the ability to write a perfect j is in the latent space but the network has to find it which is quite difficult given that it receives random noise as input also. In addition to this, this GAN works at the character level, and therefore has trouble generating realistic ligatures as seen in both examples below. The “ou” in “bonjour” looks off, and the “us” in “olibrius” has some weird artefact of a ligature remaining. 
 
