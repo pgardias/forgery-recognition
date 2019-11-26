@@ -34,6 +34,8 @@ Since the data is represented as an image, it is converted to an array of pixel 
 
 Online handwriting data is rare to find, and since the author had to write on a tablet or whiteboard it typically is messier than their actual handwriting. Because of this, their style may not match with their actual handwriting style. However, compared to offline handwriting, online handwriting is much more meaningful for extracting unique features of handwriting, this is because it is represented as a series of pen strokes. Figure 2 shows the online handwritten text from the IAM offline database. Note that the characters should be connected as shown by the dots connecting them.
 
+![](img/so_says_the_times.PNG)
+
 **Figure 2.** Pen Strokes representing online handwriting https://github.com/sjvasquez/handwriting-synthesis/pull/14
 
 With online handwritten data it is simple to tell when one letter ends and the next begins as we have the discrete points that create each letter. Since data is also included about when the pen lifts up then more complex features such as real time handwriting generation can be done. Finally, since we have the (x,y) of each pen stroke then we can determine the “curviness” of each letter, where the ligatures connect each letter, the average distance between letters and so on.
@@ -55,11 +57,17 @@ The loss function for R is connectionist temporal classification (CTC) which is 
 
 The loss function for D is a standard GAN loss which closely resembles cross-entropy loss as shown in figure 3. Here D(x) is the probability a discriminator thinks an output is real, Ex and Ez are the expected value over real inputs and all inputs (including noise). Finally D(G(z)) is the probability that the discriminator thinks a fake output is real.
 
+![](img/gan_loss.PNG)
+
 **Figure 3.** Minimax GAN loss from https://developers.google.com/machine-learning/gan/loss
 
 GANs are new deep learning models so they are very complex. This model is great at creating realistic output with minimal data to train on however. Therefore, it is great for datasets with only a few samples for an author. It also uses offline handwriting.  Below is an example of a generated word that looks quite realistic, beneath it is another output that looks very off. In general these models have varying degrees of success. This is due to the fact that GANs attempt to convert input from the latent space into the output space, therefore the ability to write a perfect j is in the latent space but the network has to find it which is quite difficult given that it receives random noise as input also. In addition to this, this GAN works at the character level, and therefore has trouble generating realistic ligatures as seen in both examples below. The “ou” in “bonjour” looks off, and the “us” in “olibrius” has some weird artefact of a ligature remaining. 
 
+![](img/bonjour.png)
+
 **Figure 4.** The output of the GAN for the word “bonjour” 
+
+![](img/olibrius.png)
 
 **Figure 5.** The output of the GAN for the word “olibrius”
 
@@ -72,6 +80,6 @@ In summation, GANs are great for handwriting synthesis as they can use offline h
 
 2. *Crettez, J. P. (1995, August). A set of handwriting families: style recognition. In Proceedings of 3rd International Conference on Document Analysis and Recognition (Vol. 1, pp. 489-494). IEEE.*
 
-3. *Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, S., ... & Bengio, Y. (2014). Generative adversarial nets. In Advances in neural information processing systems (pp. 2672-2680).*
+3. *Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, & Bengio, Y. (2014). Generative adversarial nets. In Advances in neural information processing systems (pp. 2672-2680).*
 
 4. *Alonso, E., Moysset, B., & Messina, R. (2019). Adversarial Generation of Handwritten Text Images Conditioned on Sequences. arXiv preprint arXiv:1903.00277.*
