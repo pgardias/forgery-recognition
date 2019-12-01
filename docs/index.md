@@ -14,7 +14,7 @@ Handwriting synthesis is a recent field of study in machine learning. The proble
 
 2. Synthesize new handwritten text based on the extracted style
 
-Generating handwriting is not a new problem in computer science as there is a paper from 1996  that details a technique to generate handwriting without the use of machine learning [1]. This program simply spliced up input images of handwritten text into glyphs, such as the letter combination “th”, which were then strung together to create new text. Obviously this doesn’t work well for generating text that the program hasn’t seen before, and does a bad job of capturing the author’s style. Below we will explore current machine learning techniques and their individual strengths and weaknesses. 
+Generating handwriting is not a new problem in computer science as there is a paper from 1996 that details a technique to generate handwriting without the use of machine learning [1]. This program simply spliced up input images of handwritten text into glyphs, such as the letter combination “th”, which were then strung together to create new text. Obviously this doesn’t work well for generating text that the program hasn’t seen before, and does a bad job of capturing the author’s style. Below we will explore current machine learning techniques and their individual strengths and weaknesses. 
 
 TODO: INSERT IMAGE OF PROBLEM HERE
 
