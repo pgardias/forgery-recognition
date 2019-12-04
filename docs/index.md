@@ -38,9 +38,9 @@ Since the data is represented as an image, it is converted to an array of pixel 
 
 Online handwriting data is rare to find, and since the author had to write on a tablet or whiteboard it typically is messier than their actual handwriting. Because of this, their style may not match with their actual handwriting style. However, compared to offline handwriting, online handwriting is much more meaningful for extracting unique features of handwriting, this is because it is represented as a series of pen strokes. Figure 2 shows the online handwritten text from the IAM offline database. Note that the characters should be connected as shown by the dots connecting them.
 
-![](img/so_says_the_times.PNG)
+![](https://user-images.githubusercontent.com/25054321/48716891-4e9aab00-ec53-11e8-860b-a2cfe0e1bb34.png)
 
-**Figure 2.** [Pen Strokes representing online handwriting](https://github.com/sjvasquez/handwriting-synthesis/pull/14)
+**Figure 2.** [Pen Strokes representing online handwriting](https://github.com/sjvasquez/handwriting-synthesis/pull/14#issuecomment-439935942)
 
 With online handwritten data it is simple to tell when one letter ends and the next begins as we have the discrete points that create each letter. Since data is also included about when the pen lifts up then more complex features such as real time handwriting generation can be done. Finally, since we have the (x,y) of each pen stroke then we can determine the “curviness” of each letter, where the ligatures connect each letter, the average distance between letters and so on.
 
