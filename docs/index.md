@@ -91,6 +91,7 @@ In summation, GANs are great for handwriting synthesis as they can use offline h
 
 ### Simple GAN
 Basic GAN model implemented based on GAN constructed for MNIST digits (https://machinelearningmastery.com/how-to-develop-a-generative-adversarial-network-for-an-mnist-handwritten-digits-from-scratch-in-keras/). Basic GAN has two components:
+
 Discriminator:
 - 2 convolutional layers 
 - Single output node (real/fake)
