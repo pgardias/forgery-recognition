@@ -1,4 +1,4 @@
-# Perfect Forgery
+# Forgery Recognition Through Handwriting Style Extraction and Emulation
 
 Our initial project proposal consisted of two distinct parts:
 1. Creating an LSTM to generate handwriting in a someone’s particular style
