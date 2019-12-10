@@ -98,6 +98,22 @@ The dataset contains Genuine and Forged signatures of 30 people. Each person has
 ### Siamese neural network
 Siamese models have been theorized to excel at signature detection since 1994. Thanks to the increasing computational power, it’s getting more and more popular for different verification tasks such as face recognition, online signature verification etc. Siamese neural network contains two identical convolutional neural networks with the same parameters and weights accepting two distinct images. The two subnetworks are then joined by a cost function at the top, which computing a distance metric between the highest level feature representation on each side of the network.
 
+After training, the predicted similarity score on similar and dissimilar tuples are shown as following.
+
+![](img/siamesenetwork_table_s9.PNG)
+
+**Figure 6.** Summary table of similarity score
+
+It predict a higher similarity between similar tuples than dissimilar tuples. Following are the images examples of similar and dissimilar tuples with highest and lowest similarity score. We can see that, for the similar tuple, the network can detect very similar signature while the reason for lowest score is also obvious. For dissimilar signature, the similarity score can be driven by different reasons such as low quality forgery or complete different images.
+
+![](img/siamese_real_real.png)
+
+**Figure 7.** Example of real v.s real 
+
+![](img/siamese_real_fake.png)
+
+**Figure 7.** Example of real v.s fake 
+
 ## Methods - Part 2. Text Generation
 
 ### Data Set: EMNIST Letters
@@ -154,3 +170,5 @@ Although we achieved results that are comparable to state-of-the-art models, gen
 *Graves, Alex. "Generating sequences with recurrent neural networks." arXiv preprint arXiv:1308.0850 (2013).*
 
 *Alonso, E., Moysset, B., & Messina, R. (2019). Adversarial Generation of Handwritten Text Images Conditioned on Sequences. arXiv preprint arXiv:1903.00277.*
+
+*Dey S, Dutta A, Toledo JI, Ghosh SK, Lladós J, Pal U (2017) Signet: convolutional Siamese network for writer independent offline signature verification. arXiv preprint arXiv:1707.02131.*
