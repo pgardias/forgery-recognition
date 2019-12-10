@@ -82,7 +82,25 @@ GANs are relatively new deep learning models with a number of interesting potent
 
 In summation, GANs are great for handwriting synthesis as they can use offline handwritten data, on top of that they fewer samples than other techniques to create authentic output. However, they have trouble creating realistic characters, as since they have to navigate the latent space they will rarely find the best character, and they have trouble generating ligatures between characters.
 
-### Dynamic Programming with Random Forests
+## Our Project - Part 1. Forgery Detection
+
+## Our Project - Part 2. Text Generation
+
+### Data Set: EMNIST Letters
+145,600 handwritten characters (A-Z) available as 28 x 28 pixelated images. The Python package EMNIST handles importing and letter label arrays are available to stratify the training data.  
+
+### Simple GAN
+Basic GAN model implemented based on GAN constructed for MNIST digits (https://machinelearningmastery.com/how-to-develop-a-generative-adversarial-network-for-an-mnist-handwritten-digits-from-scratch-in-keras/). Basic GAN has two components:
+Discriminator:
+- 2 convolutional layers 
+- Single output node (real/fake)
+- Model trained to minimize binary cross entropy loss (minimize ‘fakes’) 
+Generator:
+- First dense layer (low resolution representation)
+- Reshaping layers for increasing resolution
+- Model updates when discriminator detects a fake
+
+
 
 # References
 1. *Guyon, I. (1996). Handwriting synthesis from handwritten glyphs. In Proceedings of the Fifth International Workshop on Frontiers of Handwriting Recognition (pp. 140-153).*
