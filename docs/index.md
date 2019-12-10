@@ -56,6 +56,15 @@ Although this section seems like it’s leading to the conclusion that online ha
 In this section we will explore the three general techniques we found while researching this topic and compare and contrast their strengths and weaknesses. We will discuss long short-term memory neural networks, generative adversarial networks, and dynamic programming with random forests. Each of these models uses different techniques to generate text, and we will explain how this influences the quality of generated text.
 
 ### LSTM
+Long Short-term Memory (LSTM) is a Recurrent Neural Network (RNN) architecture that is designed to store and access information better than RNNs, which have a diminishing ability to model long-range structures. This problem is because the network’s predictions are based only on the last few inputs, which were themselves predicted by the network. The longer memory present in LSTMs provides an opportunity to recover from past mistakes due to the stabilising effect of a longer memory. The prediction network used by Graves, 2014 uses a deep RNN composed of stacked LSTM layers, and generates results that are competitive with state-of-the-art language models in both single glyph or word generation. A key difference of the LSTM is that due to the time step-context based learning, it is only able to learn from online writing, which consists of a sequence of strokes represented as 2D vectors relative to the end point of the previous stroke. Graves uses the IAM Online Handwriting Database to provide experimental results.
+
+![](img/lstm_cell.PNG)
+
+**Figure X.** Long Short-term Memory Cell used in Graves' LSTM
+
+Graves’ LSTM uses purpose-built memory cells seen in Figure X above to store information. The prediction within the network consists of a multinomial distribution, of size equal to the number of text classes, which is parameterised by a softmax at the output. This poses a problem for most cases of prediction done on a word level since the number of text classes is equal to the number of words in the dictionary. Prediction done on a character level has been shown to have slightly worse performance than equivalent word-level models, however it has more interesting applications because the finer granularity maximizes the generative flexibility of the resulting model.
+
+
 
 ### GAN
 Generative adversarial network (GAN) models are a machine learning technique that aims to automatically create the best output possible with the least effort from the programmer [3]. This is done by creating two neural networks that work together to automate the process of improving models. One neural network is the generator which outputs data which the other neural network, the discriminator, attempts to distinguish whether the data is computer-generated or not. The goal of the generator is to increase the error of the discimator by creating the most believable samples possible, this is done by backpropagating to each network after each classification by the discriminator.
