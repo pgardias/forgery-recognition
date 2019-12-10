@@ -10,6 +10,7 @@ Applications areas for handwriting synthesis and forgery detection models includ
 # Our Project
 
 Part 1. Forgery Detection by Neural Network
+
 Part 2. Text Generation by Generative Adversarial Network (GAN) and Convolutional Neural Network (CNN) - Improved GAN
 
 ## Handwriting Synthesis
