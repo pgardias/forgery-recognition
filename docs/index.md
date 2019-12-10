@@ -115,10 +115,12 @@ Generator:
 Word and sentence generation is performed by generating one letter at a time using the letter-specific generator and appending these to form individual words, with whitespace appended for spaces. The trained generators for 50 and 100 epochs of training are available in this repository, together with a jupyter notebook that can be used to generate text and/or train additional letter-generation models. 
 
 # References
-1. *Guyon, I. (1996). Handwriting synthesis from handwritten glyphs. In Proceedings of the Fifth International Workshop on Frontiers of Handwriting Recognition (pp. 140-153).*
+*Guyon, I. (1996). Handwriting synthesis from handwritten glyphs. In Proceedings of the Fifth International Workshop on Frontiers of Handwriting Recognition (pp. 140-153).*
 
-2. *Crettez, J. P. (1995, August). A set of handwriting families: style recognition. In Proceedings of 3rd International Conference on Document Analysis and Recognition (Vol. 1, pp. 489-494). IEEE.*
+*Crettez, J. P. (1995, August). A set of handwriting families: style recognition. In Proceedings of 3rd International Conference on Document Analysis and Recognition (Vol. 1, pp. 489-494). IEEE.*
 
-3. *Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, & Bengio, Y. (2014). Generative adversarial nets. In Advances in neural information processing systems (pp. 2672-2680).*
+*Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, & Bengio, Y. (2014). Generative adversarial nets. In Advances in neural information processing systems (pp. 2672-2680).*
 
-4. *Alonso, E., Moysset, B., & Messina, R. (2019). Adversarial Generation of Handwritten Text Images Conditioned on Sequences. arXiv preprint arXiv:1903.00277.*
+*Graves, Alex. "Generating sequences with recurrent neural networks." arXiv preprint arXiv:1308.0850 (2013).*
+
+*Alonso, E., Moysset, B., & Messina, R. (2019). Adversarial Generation of Handwritten Text Images Conditioned on Sequences. arXiv preprint arXiv:1903.00277.*
