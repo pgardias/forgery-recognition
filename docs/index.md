@@ -127,6 +127,10 @@ The writing can be improved to look even more realistic by using a Gaussian blur
 
   Figure YY.
 
+## Results
+
+## Discussion and Conclusions
+
 # References
 *Guyon, I. (1996). Handwriting synthesis from handwritten glyphs. In Proceedings of the Fifth International Workshop on Frontiers of Handwriting Recognition (pp. 140-153).*
 
