@@ -91,7 +91,7 @@ GANs are relatively new deep learning models with a number of interesting potent
 
 In summation, GANs are great for handwriting synthesis as they can use offline handwritten data, on top of that they fewer samples than other techniques to create authentic output. However, they have trouble creating realistic characters, as since they have to navigate the latent space they will rarely find the best character, and they have trouble generating ligatures between characters.
 
-## Methods - Part 1. Forgery Detection
+## Part 1. Forgery Detection
 ### Data Set: Handwritten Signatures
 The [dataset](https://www.kaggle.com/divyanshrai/handwritten-signatures) contains Genuine and Forged signatures of 30 people. Each person has 5 Genuine signatures which they made themselves and 5 Forged signatures someone else made.
 
@@ -114,7 +114,7 @@ It predict a higher similarity between similar tuples than dissimilar tuples. Fo
 
 **Figure 7.** Example of real v.s fake 
 
-## Methods - Part 2. Text Generation
+## Part 2. Text Generation
 
 ### Data Set: EMNIST Letters
 145,600 handwritten characters (A-Z) available as 28 x 28 pixelated images. The Python package EMNIST handles importing and letter label arrays are available to stratify the training data.  
