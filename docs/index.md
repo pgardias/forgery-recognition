@@ -95,12 +95,13 @@ Discriminator:
 - 2 convolutional layers 
 - Single output node (real/fake)
 - Model trained to minimize binary cross entropy loss (minimize ‘fakes’) 
+
 Generator:
 - First dense layer (low resolution representation)
 - Reshaping layers for increasing resolution
 - Model updates when discriminator detects a fake
 
-
+Word and sentence generation is performed by generating one letter at a time using the letter-specific generator and appending these to form individual words, with whitespace appended for spaces.
 
 # References
 1. *Guyon, I. (1996). Handwriting synthesis from handwritten glyphs. In Proceedings of the Fifth International Workshop on Frontiers of Handwriting Recognition (pp. 140-153).*
