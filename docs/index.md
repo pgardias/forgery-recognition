@@ -91,14 +91,14 @@ GANs are relatively new deep learning models with a number of interesting potent
 
 In summation, GANs are great for handwriting synthesis as they can use offline handwritten data, on top of that they fewer samples than other techniques to create authentic output. However, they have trouble creating realistic characters, as since they have to navigate the latent space they will rarely find the best character, and they have trouble generating ligatures between characters.
 
-## Our Project - Part 1. Forgery Detection
+## Methods - Part 1. Forgery Detection
 ### Data Set: Handwritten Signatures
 The dataset contains Genuine and Forged signatures of 30 people. Each person has 5 Genuine signatures which they made themselves and 5 Forged signatures someone else made. (https://www.kaggle.com/divyanshrai/handwritten-signatures)
 
 ### Siamese neural network
 Siamese models have been theorized to excel at signature detection since 1994. Thanks to the increasing computational power, it’s getting more and more popular for different verification tasks such as face recognition, online signature verification etc. Siamese neural network contains two identical convolutional neural networks with the same parameters and weights accepting two distinct images. The two subnetworks are then joined by a cost function at the top, which computing a distance metric between the highest level feature representation on each side of the network.
 
-## Our Project - Part 2. Text Generation
+## Methods - Part 2. Text Generation
 
 ### Data Set: EMNIST Letters
 145,600 handwritten characters (A-Z) available as 28 x 28 pixelated images. The Python package EMNIST handles importing and letter label arrays are available to stratify the training data.  
@@ -118,6 +118,8 @@ Generator:
 
 Word and sentence generation is performed by generating one letter at a time using the letter-specific generator and appending these to form individual words, with whitespace appended for spaces. The trained generators for 50 and 100 epochs of training are available in this repository, together with a jupyter notebook that can be used to generate text and/or train additional letter-generation models. 
 
+![](img/baselineGANimages_s15.png)
+
 ### CNN GAN
 To improve the basic GAN model we attempted to make the model produce more legible letters. The basic GAN model had high variance of output quality and therefore we wanted to reduce this. Ideally, we would have connected our siamese network and our GAN to produce words that were realistic, but since our GAN produces words at the letter level we could find no meaningful way to connect these two. We needed to develop a loss function that could tell us what letter in a word had the most weight on it being illegible and then backpropagate to that GAN, so this would have taken way too much time. Instead we developed a convolutional neural network (CNN) that was trained on the EMNIST dataset to classify letters. 
 
@@ -132,6 +134,12 @@ The writing can be improved to look even more realistic by using a Gaussian blur
   Figure YY.
 
 ## Results
+![](img/siamesenetwork_table_s9.png)
+
+![](img/simpleGAN_table_s14.png)
+
+![](img/legibilitytable_s19.png)
+
 
 ## Discussion and Conclusions
 
