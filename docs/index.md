@@ -93,6 +93,10 @@ In summation, GANs are great for handwriting synthesis as they can use offline h
 
 ## Our Project - Part 1. Forgery Detection
 ### Data Set: Handwritten Signatures
+The dataset contains Genuine and Forged signatures of 30 people. Each person has 5 Genuine signatures which they made themselves and 5 Forged signatures someone else made. (https://www.kaggle.com/divyanshrai/handwritten-signatures)
+
+### Siamese neural network
+Siamese models have been theorized to excel at signature detection since 1994. Thanks to the increasing computational power, it’s getting more and more popular for different verification tasks such as face recognition, online signature verification etc. Siamese neural network contains two identical convolutional neural networks with the same parameters and weights accepting two distinct images. The two subnetworks are then joined by a cost function at the top, which computing a distance metric between the highest level feature representation on each side of the network.
 
 ## Our Project - Part 2. Text Generation
 
