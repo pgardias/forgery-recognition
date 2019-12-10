@@ -153,7 +153,16 @@ The writing can be improved to look even more realistic by using a Gaussian blur
 
 *Figure YY.*
 
+After generating 800 random words with both the real EMNIST data and the CNN GAN generated words we blurred them to create a fair test. Since the CNN GAN generated words contain gray splotches the Siamese model would always be able to identify the fakes by this. After blurring we found that again 0% of our faked output could get by the siamese model as shown in Figure ZZ. However, the similarity scores of the inputs were much more revealing as to what changed. The similarity score between (real,real) was now only .625 and the similarity score between (real,fake) was .585. This margin is a large improvement over the original 1 and 0 scores as discussed in the baseline section above. These numbers indicate that the CNN GAN generates words that are much more realistic than the original baseline GAN as the similarity scores between real and fake are only .03 apart, therefore with only a few future improvements we could get fake text through this model, but for us these results show that legibility is a large part of how realistic a word looks.
+
+*Figure ZZ.*
+
 ## Legibility
+
+
+The final results we discuss are legibility and its relationship with handwriting style. Throughout this project we kept finding projects that are either great at capturing handwriting style or great at outputting legible handwriting, but very few projects can do both. Here we present our findings about the legibility of our GANs compared to a handwriting style LSTM and found that our CNN GAN has significantly higher legibility. In this aspect we traded off learning a specific handwriting style and instead focused on legibility which is evident when over 50% of our outputs looked real as shown in Figure HH. As shown our models are significantly more legible than a style learning model, and this clearly encompasses the tradeoff between legibility and style learning. This relationship makes sense as many people write with such a unique style that it may not be legible to a computer right away without some training, whereas training a model for legibility creates one that has very few features as it spends it’s computing generating strong letters.
+
+*Figure HH.*
 
 ![](img/legibilitytable_s19.png)
 
