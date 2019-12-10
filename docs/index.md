@@ -11,7 +11,7 @@ Applications areas for handwriting synthesis and forgery detection models includ
 
 Part 1. Forgery Detection by Neural Network
 
-Part 2. Text Generation by Generative Adversarial Network (GAN) and CNN - Improved GAN
+Part 2. Text Generation by Generative Adversarial Network and CNN - Improved GAN
 
 ## Handwriting Synthesis
 
@@ -25,7 +25,7 @@ Generating handwriting is not a new problem in computer science as there is a pa
 
 ## What features make handwriting styles unique?
 
-The ability to extract an author’s style from handwritten text proves a difficult problem to this day. Everyone has a unique style that is made up of many different variables such as spacing between letters, whether letters are connected or not (called ligatures), size of letters, and so on. It is important to note that these are not static features and all vary greatly between handwritten samples by the same author, so handwriting can be thought of as many distributions of independent features stacked on top of each other. Furthermore, handwriting needs to be evaluated at the character level and then the word level otherwise certain features such as ligatures will be lost. Therefore, it is very hard to identify what exactly makes a handwriting style unique, in one paper about attempting to identify authors from handwritten text researchers found their technique could not identify individual authors in a dataset of around 4,000 words but could simply groups words into classes of similar families of styles [2]. Note that depending on which language you are using and the dataset it may be possible to identify authors.
+The ability to extract an author’s style from handwritten text proves a difficult problem to this day. Everyone has a unique style that is made up of many different variables such as spacing between letters, whether letters are connected by ligatures, size of letters, and so on. It is important to note that these are not static features and all vary greatly between handwritten samples by the same author, so handwriting can be thought of as many distributions of independent features stacked on top of each other. Furthermore, handwriting needs to be evaluated at the character level and then the word level otherwise certain features such as ligatures will be lost. Therefore, it is very hard to identify what exactly makes a handwriting style unique, in one paper about attempting to identify authors from handwritten text researchers found their technique could not identify individual authors in a dataset of around 4,000 words but could simply groups words into classes of similar families of styles [2]. Note that depending on which language you are using and the dataset it may be possible to identify authors.
 
 Therefore, to extract style from handwritten text there are only a few techniques available. These techniques depend on the way the handwritten text is represented as data, which in turn determines how style is represented.
 
@@ -47,7 +47,7 @@ Online handwriting data is rare to find, and since the author had to write on a 
 
 **Figure 2.** [Pen Strokes representing online handwriting](https://github.com/sjvasquez/handwriting-synthesis/pull/14#issuecomment-439935942)
 
-With online handwritten data it is simple to tell when one letter ends and the next begins as we have the discrete points that create each letter. Since data is also included about when the pen lifts up then more complex features such as real time handwriting generation can be done. Finally, since we have the (x,y) of each pen stroke then we can determine the “curviness” of each letter, where the ligatures connect each letter, the average distance between letters and so on.
+With online handwritten data it is simple to tell when one letter ends and the next begins as we have the discrete points that create each letter. Since data is also included about when the pen lifts up then more complex features such as real time handwriting generation can be done. Finally, since we have the (x, y) of each pen stroke then we can determine the 'curviness' of each letter, where the ligatures connect each letter, the average distance between letters and so on.
 
 Although this section seems like it’s leading to the conclusion that online handwritten data is better this is not necessarily the case as we will see in the following sections about each technique and what form of data it uses. Since offline handwritten data consists of historical documents it is more attractive to get a model working with it, as this can then be applied to all handwritten text ever, whereas online handwritten text requires the apparatus to record it. 
 
@@ -73,27 +73,27 @@ Using a GAN to generate handwriting requires less data than other techniques whi
 
 The loss function for R is connectionist temporal classification (CTC) which is a loss function that compares two sequences with different sizes. For example the input may have different spacing than the output, but the output could still be correct, so CTC uses independent positioning and probability of next element to compare words which overcomes the challenges of normal loss functions. 
 
-The loss function for D is a standard GAN loss which closely resembles cross-entropy loss as shown in figure 3. Here D(x) is the probability a discriminator thinks an output is real, Ex and Ez are the expected value over real inputs and all inputs (including noise). Finally D(G(z)) is the probability that the discriminator thinks a fake output is real.
+The loss function for D is a standard GAN loss which closely resembles cross-entropy loss as shown in figure 3. Here D(x) is the probability a discriminator thinks an output is real, E_x and E_z are the expected value over real inputs and all inputs (including noise). Finally D(G(z)) is the probability that the discriminator thinks a fake output is real.
 
 ![](img/gan_loss.PNG)
 
 **Figure 3.** [Minimax GAN loss](https://developers.google.com/machine-learning/gan/loss)
 
-GANs are relatively new deep learning models with a number of interesting potential applications. This model is great at creating realistic output with minimal data to train on however. Therefore, it is great for datasets with only a few samples for an author. It also uses offline handwriting.  Below is an example of a generated word that looks quite realistic, beneath it is another output that looks very off. In general these models have varying degrees of success. This is due to the fact that GANs attempt to convert input from the latent space into the output space, therefore the ability to write a perfect j is in the latent space but the network has to find it which is quite difficult given that it receives random noise as input also. In addition to this, this GAN works at the character level, and therefore has trouble generating realistic ligatures as seen in both examples below. The “ou” in “bonjour” looks off, and the “us” in “olibrius” has some weird artifact of a ligature remaining. 
+GANs are relatively new deep learning models with a number of interesting potential applications. This model is great at creating realistic output with minimal data to train on however. Therefore, it is great for datasets with only a few samples for an author. It also uses offline handwriting.  Below is an example of a generated word that looks quite realistic, beneath it is another output that looks very off. In general these models have varying degrees of success. This is due to the fact that GANs attempt to convert input from the latent space into the output space, therefore the ability to write a perfect j is in the latent space but the network has to find it which is quite difficult given that it receives random noise as input also. In addition to this, this GAN works at the character level, and therefore has trouble generating realistic ligatures as seen in both examples below. The 'ou' in 'bonjour' looks off, and the 'us' in 'olibrius' has some weird artifact of a ligature remaining. 
 
 ![](img/bonjour.png)
 
-**Figure 4.** The output of the GAN for the word “bonjour” 
+**Figure 4.** The output of the GAN for the word 'bonjour'
 
 ![](img/olibrius.png)
 
-**Figure 5.** The output of the GAN for the word “olibrius”
+**Figure 5.** The output of the GAN for the word 'olibrius'
 
 In summation, GANs are great for handwriting synthesis as they can use offline handwritten data, on top of that they fewer samples than other techniques to create authentic output. However, they have trouble creating realistic characters, as since they have to navigate the latent space they will rarely find the best character, and they have trouble generating ligatures between characters.
 
 ## Methods - Part 1. Forgery Detection
 ### Data Set: Handwritten Signatures
-The dataset contains Genuine and Forged signatures of 30 people. Each person has 5 Genuine signatures which they made themselves and 5 Forged signatures someone else made. (https://www.kaggle.com/divyanshrai/handwritten-signatures)
+The [dataset](https://www.kaggle.com/divyanshrai/handwritten-signatures) contains Genuine and Forged signatures of 30 people. Each person has 5 Genuine signatures which they made themselves and 5 Forged signatures someone else made.
 
 ### Siamese neural network
 Siamese models have been theorized to excel at signature detection since 1994. Thanks to the increasing computational power, it’s getting more and more popular for different verification tasks such as face recognition, online signature verification etc. Siamese neural network contains two identical convolutional neural networks with the same parameters and weights accepting two distinct images. The two subnetworks are then joined by a cost function at the top, which computing a distance metric between the highest level feature representation on each side of the network.
@@ -120,7 +120,7 @@ It predict a higher similarity between similar tuples than dissimilar tuples. Fo
 145,600 handwritten characters (A-Z) available as 28 x 28 pixelated images. The Python package EMNIST handles importing and letter label arrays are available to stratify the training data.  
 
 ### Simple GAN
-Basic GAN model implemented based on GAN constructed for MNIST digits (https://machinelearningmastery.com/how-to-develop-a-generative-adversarial-network-for-an-mnist-handwritten-digits-from-scratch-in-keras/). Basic GAN has two components:
+Basic GAN model implemented based on GAN constructed for [MNIST digits](https://machinelearningmastery.com/how-to-develop-a-generative-adversarial-network-for-an-mnist-handwritten-digits-from-scratch-in-keras/). Basic GAN has two components:
 
 Discriminator:
 - 2 convolutional layers 
@@ -132,7 +132,7 @@ Generator:
 - Reshaping layers for increasing resolution
 - Model updates when discriminator detects a fake
 
-Word and sentence generation is performed by generating one letter at a time using the letter-specific generator and appending these to form individual words, with whitespace appended for spaces. The trained generators for 50 and 100 epochs of training are available in this repository, together with a jupyter notebook that can be used to generate text and/or train additional letter-generation models. 
+Word and sentence generation is performed by generating one letter at a time using the letter-specific generator and appending these to form individual words, with whitespace appended for spaces. The trained generators for 50 and 100 epochs of training are available in this repository, together with a Jupyter notebook that can be used to generate text and/or train additional letter-generation models. 
 
 ![](img/baselineGANimages_s15.png)
 
@@ -141,13 +141,13 @@ To improve the basic GAN model we attempted to make the model produce more legib
 
 The CNN has 95% accuracy on the EMNIST dataset, and ideally could predict with high certainty what letter the GAN produced. Therefore, we connected the output of the GAN to the CNN and everytime the GAN generated a letter, the CNN would predict what letter it was, this process continued until the CNN predicted the input letter we wanted to produce. We thought this would generate high quality legible results, but found that the CNN was easily spoofed by poor quality characters. Overall, this was a large improvement over our base GAN model, but it still has varying output, as shown in the Figure XX below. You can clearly see that some of the words look great, and are high quality, but a few of the words still aren’t legible. It’s obvious in the first word on the right of Figure XX, that the three pronged lines were classified as a W even though they do not fully look like a W. 
   
-  Figure XX.
+*Figure XX.*
   
 Furthermore, we created a function to create sentences, since before we could only generated set-length words. By breaking the sentence down into individual words we can generate each word at a time and then use a 28x28 white image to separate each word. These are all appended together to create sentences. 
 
-The writing can be improved to look even more realistic by using a Gaussian blur and thresholding. The original EMNIST images are 256x256 and downsampled to the 28x28 we receive, since the GAN was trained on these it will always produce blurry characters,  therefore we can attempt to solve this counteracting their downsampling. As shown in Figure YY, first we blur the image using a Gaussian blur with kernel size (3,3) and sigmaX = 0. Then we threshold the image to remove the gray splotches that remain around characters to get clean output. This does have a downside, as the original GAN output contains some pressure intensity, which can be seen in Figure YY before blurring is applied, this is a feature of real human handwriting. Alternatively, the output may remove all pressure aspects, but does appear more legible as it removes incorrect glyphs and gray splotches that damage a character’s integrity.
+The writing can be improved to look even more realistic by using a Gaussian blur and thresholding. The original EMNIST images are 256x256 and downsampled to the 28x28 we receive, since the GAN was trained on these it will always produce blurry characters,  therefore we can attempt to solve this counteracting their downsampling. As shown in Figure YY, first we blur the image using a Gaussian blur with kernel size (3, 3) and sigmaX = 0. Then we threshold the image to remove the gray splotches that remain around characters to get clean output. This does have a downside, as the original GAN output contains some pressure intensity, which can be seen in Figure YY before blurring is applied, this is a feature of real human handwriting. Alternatively, the output may remove all pressure aspects, but does appear more legible as it removes incorrect glyphs and gray splotches that damage a character’s integrity.
 
-  Figure YY.
+*Figure YY.*
 
 ## Results
 ![](img/siamesenetwork_table_s9.png)
