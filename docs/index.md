@@ -83,6 +83,7 @@ GANs are relatively new deep learning models with a number of interesting potent
 In summation, GANs are great for handwriting synthesis as they can use offline handwritten data, on top of that they fewer samples than other techniques to create authentic output. However, they have trouble creating realistic characters, as since they have to navigate the latent space they will rarely find the best character, and they have trouble generating ligatures between characters.
 
 ## Our Project - Part 1. Forgery Detection
+### Data Set: Handwritten Signatures
 
 ## Our Project - Part 2. Text Generation
 
@@ -102,7 +103,7 @@ Generator:
 - Reshaping layers for increasing resolution
 - Model updates when discriminator detects a fake
 
-Word and sentence generation is performed by generating one letter at a time using the letter-specific generator and appending these to form individual words, with whitespace appended for spaces.
+Word and sentence generation is performed by generating one letter at a time using the letter-specific generator and appending these to form individual words, with whitespace appended for spaces. The trained generators for 50 and 100 epochs of training are available in this repository, together with a jupyter notebook that can be used to generate text and/or train additional letter-generation models. 
 
 # References
 1. *Guyon, I. (1996). Handwriting synthesis from handwritten glyphs. In Proceedings of the Fifth International Workshop on Frontiers of Handwriting Recognition (pp. 140-153).*
