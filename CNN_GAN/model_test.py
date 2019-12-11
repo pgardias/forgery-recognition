@@ -1,6 +1,6 @@
 # don't use this file unless you want to mess with the model prediction/evaluation
 
-#similar to CNN.py where you may need to replace keras with tensorflow.keras
+#similar to letter_CNN.py where you may need to replace keras with tensorflow.keras
 from emnist import extract_training_samples,extract_test_samples
 import matplotlib.pyplot as plt
 from keras.models import model_from_json

@@ -1,7 +1,8 @@
-To run:
-	Just run word_gen, if you want to create different words change the bottom of the script to do so
+To generate words or sentence use
+    word_gen.py: The functions are called in the commented lines at the bottom of the file, uncomment and change words
+        accordingly to generate whatever you want.
 
-	Do not run CNN.py unless you want to retrain the CNN (the saved files have ~95% accuracy so not necessary). If you wish to run CNN.py you either need tensorflow 1.15.0 
-	or replace the keras calls with tensorflow.keras calls instead. 
-	
-	model_test.py is to see how well the model predicts random characters. You can try this or load in your own images to try.
+To run the siamese model on the blurred data simply run siamese.py
+
+You can retrain the CNN if you want but it already has 95% accuracy, if you want to retrain use letter_CNN.py
+You can test the CNN with model_test.py
