@@ -60,7 +60,7 @@ Long Short-term Memory (LSTM) is a Recurrent Neural Network (RNN) architecture t
 
 ![](img/lstm_cell.PNG)
 
-**Figure X.** Long Short-term Memory Cell used in Graves' LSTM
+**Figure 3.** Long Short-term Memory Cell used in Graves' LSTM
 
 Graves’ LSTM uses purpose-built memory cells seen in Figure X above to store information. The prediction within the network consists of a multinomial distribution, of size equal to the number of text classes, which is parameterised by a softmax at the output. This poses a problem for most cases of prediction done on a word level since the number of text classes is equal to the number of words in the dictionary. Prediction done on a character level has been shown to have slightly worse performance than equivalent word-level models, however it has more interesting applications because the finer granularity maximizes the generative flexibility of the resulting model.
 
@@ -73,21 +73,21 @@ Using a GAN to generate handwriting requires less data than other techniques whi
 
 The loss function for R is connectionist temporal classification (CTC) which is a loss function that compares two sequences with different sizes. For example the input may have different spacing than the output, but the output could still be correct, so CTC uses independent positioning and probability of next element to compare words which overcomes the challenges of normal loss functions. 
 
-The loss function for D is a standard GAN loss which closely resembles cross-entropy loss as shown in figure 3. Here D(x) is the probability a discriminator thinks an output is real, E_x and E_z are the expected value over real inputs and all inputs (including noise). Finally D(G(z)) is the probability that the discriminator thinks a fake output is real.
+The loss function for D is a standard GAN loss which closely resembles cross-entropy loss as shown in figure 4. Here D(x) is the probability a discriminator thinks an output is real, E_x and E_z are the expected value over real inputs and all inputs (including noise). Finally D(G(z)) is the probability that the discriminator thinks a fake output is real.
 
 ![](img/gan_loss.PNG)
 
-**Figure 3.** [Minimax GAN loss](https://developers.google.com/machine-learning/gan/loss)
+**Figure 4.** [Minimax GAN loss](https://developers.google.com/machine-learning/gan/loss)
 
 GANs are relatively new deep learning models with a number of interesting potential applications. This model is great at creating realistic output with minimal data to train on however. Therefore, it is great for datasets with only a few samples for an author. It also uses offline handwriting.  Below is an example of a generated word that looks quite realistic, beneath it is another output that looks very off. In general these models have varying degrees of success. This is due to the fact that GANs attempt to convert input from the latent space into the output space, therefore the ability to write a perfect j is in the latent space but the network has to find it which is quite difficult given that it receives random noise as input also. In addition to this, this GAN works at the character level, and therefore has trouble generating realistic ligatures as seen in both examples below. The 'ou' in 'bonjour' looks off, and the 'us' in 'olibrius' has some weird artifact of a ligature remaining. 
 
 ![](img/bonjour.png)
 
-**Figure 4.** The output of the GAN for the word 'bonjour'
+**Figure 5.** The output of the GAN for the word 'bonjour'
 
 ![](img/olibrius.png)
 
-**Figure 5.** The output of the GAN for the word 'olibrius'
+**Figure 6.** The output of the GAN for the word 'olibrius'
 
 In summation, GANs are great for handwriting synthesis as they can use offline handwritten data, on top of that they fewer samples than other techniques to create authentic output. However, they have trouble creating realistic characters, as since they have to navigate the latent space they will rarely find the best character, and they have trouble generating ligatures between characters.
 
@@ -102,17 +102,17 @@ After training, the predicted similarity score on similar and dissimilar tuples 
 
 ![](img/siamesenetwork_table_s9.PNG)
 
-**Figure 6.** Summary table of similarity score
+**Figure 7.** Summary table of similarity score
 
 It predict a higher similarity between similar tuples than dissimilar tuples. Following are the images examples of similar and dissimilar tuples with highest and lowest similarity score. We can see that, for the similar tuple, the network can detect very similar signature while the reason for lowest score is also obvious. For dissimilar signature, the similarity score can be driven by different reasons such as low quality forgery or complete different images. Overall, our model is able to identify a signature as real or fake with 80% accuracy.
 
 ![](img/siamese_real_real.png)
 
-**Figure 7.** Example of real v.s real 
+**Figure 8.** Example of real v.s real 
 
 ![](img/siamese_real_fake.png)
 
-**Figure 7.** Example of real v.s fake 
+**Figure 9.** Example of real v.s fake 
 
 ## Part 2. Text Generation
 
@@ -135,36 +135,38 @@ Generator:
 Word and sentence generation is performed by generating one letter at a time using the letter-specific generator and appending these to form individual words, with whitespace appended for spaces. The trained generators for 50 and 100 epochs of training are available in this repository, together with a Jupyter notebook that can be used to generate text and/or train additional letter-generation models. 
 
 ![](img/baselineGANimages_s15.PNG)
+**Figure 10.** Words generated by baseline GAN
 
 We find that neural network detection of generated images is correct 100% of the time, i.e. our generated images are easily detected.
 
 ![](img/simpleGAN_table_s14.PNG)
+**Figure 11.** Neural network detection of generated vs real images
 
 ### CNN GAN
 To improve the basic GAN model we attempted to make the model produce more legible letters. The basic GAN model had high variance of output quality and therefore we wanted to reduce this. Ideally, we would have connected our siamese network and our GAN to produce words that were realistic, but since our GAN produces words at the letter level we could find no meaningful way to connect these two. We needed to develop a loss function that could tell us what letter in a word had the most weight on it being illegible and then backpropagate to that GAN, so this would have taken way too much time. Instead we developed a convolutional neural network (CNN) that was trained on the EMNIST dataset to classify letters. 
 
-The CNN has 95% accuracy on the EMNIST dataset, and ideally could predict with high certainty what letter the GAN produced. Therefore, we connected the output of the GAN to the CNN and everytime the GAN generated a letter, the CNN would predict what letter it was, this process continued until the CNN predicted the input letter we wanted to produce. We thought this would generate high quality legible results, but found that the CNN was easily spoofed by poor quality characters. Overall, this was a large improvement over our base GAN model, but it still has varying output, as shown in the Figure XX below. You can clearly see that some of the words look great, and are high quality, but a few of the words still aren’t legible. It’s obvious in the first word on the right of Figure XX, that the three pronged lines were classified as a W even though they do not fully look like a W. 
+The CNN has 95% accuracy on the EMNIST dataset, and ideally could predict with high certainty what letter the GAN produced. Therefore, we connected the output of the GAN to the CNN and everytime the GAN generated a letter, the CNN would predict what letter it was, this process continued until the CNN predicted the input letter we wanted to produce. We thought this would generate high quality legible results, but found that the CNN was easily spoofed by poor quality characters. Overall, this was a large improvement over our base GAN model, but it still has varying output, as shown in the Figure 12 below. You can clearly see that some of the words look great, and are high quality, but a few of the words still aren’t legible. It’s obvious in the first word on the right of Figure 12, that the three pronged lines were classified as a W even though they do not fully look like a W. 
  
 ![](img/CNN_GAN_words.png)
-**Figure XX.** Words generated by the improved GAN with CNN 
+**Figure 12.** Words generated by the improved GAN with CNN 
   
 Furthermore, we created a function to create sentences, since before we could only generated set-length words. By breaking the sentence down into individual words we can generate each word at a time and then use a 28x28 white image to separate each word. These are all appended together to create sentences. 
 
-The writing can be improved to look even more realistic by using a Gaussian blur and thresholding. The original EMNIST images are 256x256 and downsampled to the 28x28 we receive, since the GAN was trained on these it will always produce blurry characters,  therefore we can attempt to solve this counteracting their downsampling. As shown in Figure YY, first we blur the image using a Gaussian blur with kernel size (3, 3) and sigmaX = 0. Then we threshold the image to remove the gray splotches that remain around characters to get clean output. This does have a downside, as the original GAN output contains some pressure intensity, which can be seen in Figure YY before blurring is applied, this is a feature of real human handwriting. Alternatively, the output may remove all pressure aspects, but does appear more legible as it removes incorrect glyphs and gray splotches that damage a character’s integrity.
+The writing can be improved to look even more realistic by using a Gaussian blur and thresholding. The original EMNIST images are 256x256 and downsampled to the 28x28 we receive, since the GAN was trained on these it will always produce blurry characters,  therefore we can attempt to solve this counteracting their downsampling. As shown in Figure 13, first we blur the image using a Gaussian blur with kernel size (3, 3) and sigmaX = 0. Then we threshold the image to remove the gray splotches that remain around characters to get clean output. This does have a downside, as the original GAN output contains some pressure intensity, which can be seen in Figure 13 before blurring is applied, this is a feature of real human handwriting. Alternatively, the output may remove all pressure aspects, but does appear more legible as it removes incorrect glyphs and gray splotches that damage a character’s integrity.
 
 ![](img/CNN_GAN_sentences.jpg)
-**Figure YY.** Sentences generated from the CNN GAN using blurring and thresholding
+**Figure 13.** Sentences generated from the CNN GAN using blurring and thresholding
 
 After generating 800 random words with both the real EMNIST data and the CNN GAN generated words we blurred them to create a fair test. Since the CNN GAN generated words contain gray splotches the Siamese model would always be able to identify the fakes by this. The blurred images were passed into the Siamese network with real labels pertaining to EMNIST words, and fake labels appeneded to CNN GAN generated words. We found that again 0% of our faked output could get by the Siamese model. However, the similarity scores of the inputs were much more revealing as to what changed. The similarity score between (real,real) was now only .625 and the similarity score between (real,fake) was .585. This margin is a large improvement over the original 1 and 0 scores as discussed in the baseline section above. These numbers indicate that the CNN GAN generates words that are much more realistic than the original baseline GAN as the similarity scores between real and fake are only .03 apart, therefore with only a few future improvements we could get fake text through this model, but for us these results show that legibility is a large part of how realistic a word looks.
 
 ## Legibility
 
 
-The final results we discuss are legibility and its relationship with handwriting style. Throughout this project we kept finding projects that are either great at capturing handwriting style or great at outputting legible handwriting, but very few projects can do both. Here we present our findings about the legibility of our GANs compared to a handwriting style LSTM and found that our CNN GAN has significantly higher legibility. In this aspect we traded off learning a specific handwriting style and instead focused on legibility which is evident when over 50% of our outputs looked real as shown in Figure HH. As shown our models are significantly more legible than a style learning model, and this clearly encompasses the tradeoff between legibility and style learning. This relationship makes sense as many people write with such a unique style that it may not be legible to a computer right away without some training, whereas training a model for legibility creates one that has very few features as it spends it’s computing generating strong letters.
+The final results we discuss are legibility and its relationship with handwriting style. Throughout this project we kept finding projects that are either great at capturing handwriting style or great at outputting legible handwriting, but very few projects can do both. Here we present our findings about the legibility of our GANs compared to a handwriting style LSTM and found that our CNN GAN has significantly higher legibility. In this aspect we traded off learning a specific handwriting style and instead focused on legibility which is evident when over 50% of our outputs looked real as shown in Figure 14. As shown our models are significantly more legible than a style learning model, and this clearly encompasses the tradeoff between legibility and style learning. This relationship makes sense as many people write with such a unique style that it may not be legible to a computer right away without some training, whereas training a model for legibility creates one that has very few features as it spends it’s computing generating strong letters.
 
 ![](img/legibility_table.jpg)
 
-**Figure HH.** Legbility comparison of our two methods, and the LSTM implementation of Grave's handwriting synthesis (you can view these images yourself in our generated images and scribe folders).
+**Figure 14.** Legbility comparison of our two methods, and the LSTM implementation of Grave's handwriting synthesis (you can view these images yourself in our generated images and scribe folders).
 
 
 
