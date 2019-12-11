@@ -88,7 +88,7 @@ In summation, GANs are great for handwriting synthesis as they can use offline h
 
 ## Part 1. Forgery Detection
 ### Data Set: Handwritten Signatures
-The [dataset](https://www.kaggle.com/divyanshrai/handwritten-signatures) contains genuine and forged signatures of 30 people. Each person has 5 genuine signatures, which they made themselves, and 5 Forged signatures someone else made.
+The [dataset](https://www.kaggle.com/divyanshrai/handwritten-signatures) contains genuine and forged signatures of 30 people. Each person has 5 genuine signatures, which they made themselves, and 5 forged signatures.
 
 ### Siamese neural network
 Siamese models have been theorized to excel at signature detection since 1994. Thanks to the increasing computational power, they're getting more popular for different verification tasks such as face recognition, online signature verification etc. Siamese neural networks contains two identical convolutional neural networks with the same parameters and weights accepting two distinct images. The two subnetworks are then joined by a cost function at the top, which computes a distance metric between the highest level feature representation on each side of the network. The model then outputs a similarity score between 0 (no similarity) and 1 (max similarity). Intuitively, a higher similarity means that two inputs are likely from the same class, and lower scores indicate the opposite. The predicted similarity score on similar and dissimilar tuples are shown as see Fig. 7.
@@ -109,7 +109,7 @@ It predict a higher similarity between similar tuples than dissimilar tuples. Fo
 
 ## Part 2. Text Generation by GAN and CNN-Reinforced GAN
 ### Data Set: EMNIST Letters
-145,600 handwritten characters available as 28 x 28 pixelated images. The Python package EMNIST handles importing and letter label arrays are available to stratify the training data.  
+145,600 handwritten characters available as 28 x 28 pixelated images. The Python package `emnist` allows easy importing of the dataset, and letter label arrays are available to stratify the training data.  
 
 ### Simple GAN
 Basic GAN model implemented based on GAN constructed for [MNIST digits](https://machinelearningmastery.com/how-to-develop-a-generative-adversarial-network-for-an-mnist-handwritten-digits-from-scratch-in-keras/). This GAN has two components:
@@ -139,7 +139,7 @@ We find that neural network detection of generated images is correct 100% of the
 ### CNN-Reinforced GAN
 To improve the basic GAN model we attempted to make the model produce more legible letters. The basic GAN model had high variance of output quality and therefore we wanted to reduce this. Ideally, we would have connected our siamese network and our GAN to produce words that were realistic, but since our GAN produces words at the letter level we could find no meaningful way to connect these two. We needed to develop a loss function that could tell us what letter in a word had the most weight on it being illegible and then backpropagate to that GAN, so this would have taken way too much time. Instead we developed a convolutional neural network (CNN) that was trained on the EMNIST dataset to classify letters. 
 
-The CNN has 95% accuracy on the EMNIST dataset, and ideally could predict with high certainty what letter the GAN produced. Therefore, we connected the output of the GAN to the CNN and everytime the GAN generated a letter, the CNN would predict what letter it was, this process continued until the CNN predicted the input letter we wanted to produce. We thought this would generate high quality legible results, but found that the CNN was easily spoofed by poor quality characters. Overall, this was a large improvement over our base GAN model, but it still has varying output, as shown in the Figure 12 below. You can clearly see that some of the words look great, and are high quality, but a few of the words still aren’t legible. It’s obvious in the first word on the right of Figure 12, that the three pronged lines were classified as a W even though they do not fully look like a W. 
+The CNN has 95% accuracy on the EMNIST dataset, and ideally could predict with high certainty what letter the GAN produced. Therefore, we connected the output of the GAN to the CNN and everytime the GAN generated a letter, the CNN would predict what letter it was, this process continued until the CNN predicted the input letter we wanted to produce. We thought this would generate high quality legible results, but found that the CNN was easily spoofed by poor quality characters. Overall, this was a large improvement over our base GAN model, but it still has varying output, as shown in the Fig. 12 below. You can clearly see that some of the words look great, and are high quality, but a few of the words still aren’t legible. It’s obvious in the first word on the right of Fig. 12, that the three pronged lines were classified as a W even though they do not fully look like a 'w'. 
  
 ![](img/CNN_GAN_words.png)
 
@@ -166,14 +166,14 @@ The final results we discuss are legibility and its relationship with handwritin
 Although we achieved results that are comparable to state-of-the-art models, generating handwriting that is undetectable is currently challenging to nearly impossible. A major problem of handwriting synthesis of the tradeoff of legibility and detectability, referring to the emulation of an initial handwriting style. Additionally, the consistency of synthesis means that it is easily able to discern many examples of generated writing due to obscure glyphs or hanging, random lines. Our CNN-improved GAN improves the legibility of generated words, however lacks the consistency of ligatures which is present in real handwriting and therefore would easily be identified as forgery when examined by hand using traditional handwriting forensics means. On the other hand, our GAN-generated data may be useful for cases where few samples are available. A possible future extension of our existing work could be done by applying a Siamese model as the GAN discriminator.
 
 # References
-*Guyon, I. (1996). Handwriting synthesis from handwritten glyphs. In Proceedings of the Fifth International Workshop on Frontiers of Handwriting Recognition (pp. 140-153).*
+*Alonso, E., Moysset, B., & Messina, R. (2019). Adversarial Generation of Handwritten Text Images Conditioned on Sequences. arXiv preprint arXiv:1903.00277.*
 
 *Crettez, J. P. (1995, August). A set of handwriting families: style recognition. In Proceedings of 3rd International Conference on Document Analysis and Recognition (Vol. 1, pp. 489-494). IEEE.*
+
+*Dey S, Dutta A, Toledo JI, Ghosh SK, Lladós J, Pal U (2017) Signet: convolutional Siamese network for writer independent offline signature verification. arXiv preprint arXiv:1707.02131.*
 
 *Goodfellow, I., Pouget-Abadie, J., Mirza, M., Xu, B., Warde-Farley, D., Ozair, & Bengio, Y. (2014). Generative adversarial nets. In Advances in neural information processing systems (pp. 2672-2680).*
 
 *Graves, Alex. "Generating sequences with recurrent neural networks." arXiv preprint arXiv:1308.0850 (2013).*
 
-*Alonso, E., Moysset, B., & Messina, R. (2019). Adversarial Generation of Handwritten Text Images Conditioned on Sequences. arXiv preprint arXiv:1903.00277.*
-
-*Dey S, Dutta A, Toledo JI, Ghosh SK, Lladós J, Pal U (2017) Signet: convolutional Siamese network for writer independent offline signature verification. arXiv preprint arXiv:1707.02131.*
+*Guyon, I. (1996). Handwriting synthesis from handwritten glyphs. In Proceedings of the Fifth International Workshop on Frontiers of Handwriting Recognition (pp. 140-153).*
