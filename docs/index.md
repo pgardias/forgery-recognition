@@ -134,11 +134,11 @@ Generator:
 
 Word and sentence generation is performed by generating one letter at a time using the letter-specific generator and appending these to form individual words, with whitespace appended for spaces. The trained generators for 50 and 100 epochs of training are available in this repository, together with a Jupyter notebook that can be used to generate text and/or train additional letter-generation models. 
 
-![](img/baselineGANimages_s15.png)
+![](img/baselineGANimages_s15.PNG)
 
 We find that neural network detection of generated images is correct 100% of the time, i.e. our generated images are easily detected.
 
-![](img/simpleGAN_table_s14.png)
+![](img/simpleGAN_table_s14.PNG)
 
 ### CNN GAN
 To improve the basic GAN model we attempted to make the model produce more legible letters. The basic GAN model had high variance of output quality and therefore we wanted to reduce this. Ideally, we would have connected our siamese network and our GAN to produce words that were realistic, but since our GAN produces words at the letter level we could find no meaningful way to connect these two. We needed to develop a loss function that could tell us what letter in a word had the most weight on it being illegible and then backpropagate to that GAN, so this would have taken way too much time. Instead we developed a convolutional neural network (CNN) that was trained on the EMNIST dataset to classify letters. 
@@ -155,9 +155,7 @@ The writing can be improved to look even more realistic by using a Gaussian blur
 ![](img/CNN_GAN_sentences.jpg)
 **Figure YY.** Sentences generated from the CNN GAN using blurring and thresholding
 
-After generating 800 random words with both the real EMNIST data and the CNN GAN generated words we blurred them to create a fair test. Since the CNN GAN generated words contain gray splotches the Siamese model would always be able to identify the fakes by this. The blurred images were passed into the Siamese network with real labels pertaining to EMNIST words, and fake labels appeneded to CNN GAN generated words. We found that again 0% of our faked output could get by the Siamese model as shown in Figure ZZ. However, the similarity scores of the inputs were much more revealing as to what changed. The similarity score between (real,real) was now only .625 and the similarity score between (real,fake) was .585. This margin is a large improvement over the original 1 and 0 scores as discussed in the baseline section above. These numbers indicate that the CNN GAN generates words that are much more realistic than the original baseline GAN as the similarity scores between real and fake are only .03 apart, therefore with only a few future improvements we could get fake text through this model, but for us these results show that legibility is a large part of how realistic a word looks.
-
-**Figure ZZ.**
+After generating 800 random words with both the real EMNIST data and the CNN GAN generated words we blurred them to create a fair test. Since the CNN GAN generated words contain gray splotches the Siamese model would always be able to identify the fakes by this. The blurred images were passed into the Siamese network with real labels pertaining to EMNIST words, and fake labels appeneded to CNN GAN generated words. We found that again 0% of our faked output could get by the Siamese model. However, the similarity scores of the inputs were much more revealing as to what changed. The similarity score between (real,real) was now only .625 and the similarity score between (real,fake) was .585. This margin is a large improvement over the original 1 and 0 scores as discussed in the baseline section above. These numbers indicate that the CNN GAN generates words that are much more realistic than the original baseline GAN as the similarity scores between real and fake are only .03 apart, therefore with only a few future improvements we could get fake text through this model, but for us these results show that legibility is a large part of how realistic a word looks.
 
 ## Legibility
 
