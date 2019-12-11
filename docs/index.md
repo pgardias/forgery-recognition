@@ -112,17 +112,16 @@ It predict a higher similarity between similar tuples than dissimilar tuples. Fo
 145,600 handwritten characters available as 28 x 28 pixelated images. The Python package `emnist` allows easy importing of the dataset, and letter label arrays are available to stratify the training data.  
 
 ### Simple GAN
-Basic GAN model implemented based on GAN constructed for [MNIST digits](https://machinelearningmastery.com/how-to-develop-a-generative-adversarial-network-for-an-mnist-handwritten-digits-from-scratch-in-keras/). This GAN has two components:
+We referenced a basic GAN model implemented on [MNIST digits](https://machinelearningmastery.com/how-to-develop-a-generative-adversarial-network-for-an-mnist-handwritten-digits-from-scratch-in-keras/). Our more complex GAN has two components:
 
-Discriminator:
-- 2 convolutional layers 
-- Single output node (real/fake)
-- Model trained to minimize binary cross entropy loss (minimize ‘fakes’) 
-
-Generator:
-- First dense layer (low resolution representation)
-- Reshaping layers for increasing resolution
-- Model updates when discriminator detects a fake
+- Discriminator
+  - 2 convolutional layers 
+  - Single output node (real/fake)
+  - Model trained to minimize binary cross entropy loss (minimize ‘fakes’) 
+- Generator
+  - First dense layer (low resolution representation)
+  - Reshaping layers for increasing resolution
+  - Model updates when discriminator detects a fake
 
 Word and sentence generation is performed by generating one letter at a time using the letter-specific generator and appending these to form individual words, with whitespace appended for spaces. The trained generators for 50 and 100 epochs of training are available in this repository, together with a Jupyter notebook that can be used to generate text and/or train additional letter-generation models. 
 
