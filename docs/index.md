@@ -159,7 +159,7 @@ The final results we discuss are legibility and its relationship with handwritin
 
 ![](img/legibility_table.jpg)
 
-**Fig. 14.** Legbility comparison of our two methods and Graves' LSTM
+**Fig. 14.** Legibility comparison of our two methods and Graves' LSTM
 
 ## Conclusion
 Although we achieved results that are comparable to state-of-the-art models, generating handwriting that is undetectable is currently challenging to nearly impossible. A major problem of handwriting synthesis of the tradeoff of legibility and detectability, referring to the emulation of an initial handwriting style. Additionally, the consistency of synthesis means that it is easily able to discern many examples of generated writing due to obscure glyphs or hanging, random lines. Our CNN-improved GAN improves the legibility of generated words, however lacks the consistency of ligatures which is present in real handwriting and therefore would easily be identified as forgery when examined by hand using traditional handwriting forensics means. On the other hand, our GAN-generated data may be useful for cases where few samples are available. A possible future extension of our existing work could be done by applying a Siamese model as the GAN discriminator.
